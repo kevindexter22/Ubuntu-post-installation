@@ -161,11 +161,6 @@ RESET='\033[0m'
         rm -fr ttf-mscorefonts-installer_3.8_all.deb
     }
     
-    install_shell_ginnie() {
-        aptitude install python3.12 pipx -y
-        pipx install shell-genie
-        shell-genie init
-    }
     install_advanced_tools() {
        apt install nmap nload alacritty tmux dnsenum dnsutils mtr iperf3 lynis nethogs rkhunter -y
     }
@@ -197,7 +192,11 @@ RESET='\033[0m'
     }
     
     install_it_tools() {
-        aptitude install dia dia-* rpi-imager anydesk balena-etcher-electron build-essential dkms virtualbox-7.1 wireshark -y 
+        aptitude install dia dia-* rpi-imager anydesk build-essential dkms virtualbox-7.1 wireshark -y 
+        wget https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
+        dpkg -i dpkg -i balena-etcher*
+        apt --fix-broken install
+        rm -fr balena-etcher*
         sudo snap install core
         sudo snap install drawio
         sudo snap install woe-usb --edge
