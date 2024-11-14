@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Declaring Variables
+# Declarando Variáveis
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ──────────────────────
-# Colors
+# Cores
 # ──────────────────────
 
 RED='\033[0;31m'
@@ -14,7 +14,7 @@ GREEN='\033[0;32m'
 
 YELLOW='\033[0;33m'
 
-ORANGE='\033[1;33m'    # Orange approach
+ORANGE='\033[1;33m'    # Cor próxima ao laranja
 
 MAGENTA='\033[1;35m'
 
@@ -25,13 +25,13 @@ GRAY='\033[1;30m'
 RESET='\033[0m'
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Function to validate if the script is running as root
+# Função para validar se o script está rodando como root
 # ─────────────────────────────────────────────────────────────────────────────
 
     check_root_user() {
         if [ "$(id -u)" != 0 ]; then
-           echo -e "${RED}Please run the script as root!${RESET}"
-           echo -e "${RED}We need to run to do administrative tasks${RESET}"
+           echo -e "${RED}Por favor, rode esse script como root root!${RESET}"
+           echo -e "${RED}Precisaremos executar alguns como administrador${RESET}"
            exit 1
         fi
     }
@@ -61,7 +61,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Disabling ADS in the Ubuntu Pro Terminal
+# Desabilitando ADS no terminal Ubuntu Pro
 # ─────────────────────────────────────────────────────────────────────────────
 
     disable_terminal_ads() {
@@ -70,7 +70,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Cleanup function
+# Função de limpeza
 # ─────────────────────────────────────────────────────────────────────────────
 
     cleanup() {
@@ -78,7 +78,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Configuring flathub to install flatpak packages
+# Configurando flathub para instalar pacotes flatpak
 # ─────────────────────────────────────────────────────────────────────────────
 
     setup_flathub() {
@@ -88,7 +88,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Unlock options on startup manager
+# Desbloqueando opções no gerenciador de inicialização
 # ─────────────────────────────────────────────────────────────────────────────
 
     startup_manager() {
@@ -96,7 +96,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Adding third party repositories
+# Adicionando repositórios de terceiros
 # ─────────────────────────────────────────────────────────────────────────────
 
     
@@ -147,7 +147,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Installing applications and tools
+# Instalando aplicativos e ferramentas
 # ─────────────────────────────────────────────────────────────────────────────
 
     install_essentials_tools() {
@@ -224,101 +224,101 @@ RESET='\033[0m'
           aptitude install obs-studio kdenlive -y
      }
      install_all_extra_packages() {
-          msg 'Configuring repositories...'
+          msg 'Configurando repositórios...'
           repo_it_tools
           repo_programming_applications
           repo_for_gamers
           system_update
-          msg 'Installing all extra packages...'
-          msg 'Installing design applications...'
+          msg 'Instalando todos os pacotes extras...'
+          msg 'Instalando aplicativos de design...'
           install_design_applications
-          msg 'Installing programming applications...'
+          msg 'Instalando aplicativos de programação...'
           install_programming_applications
-          msg 'Installing IT tools...'
+          msg 'Instalando ferramentas de TI...'
           install_it_tools
-          msg 'Installing gamers applications...'
+          msg 'Instalando aplicativos para gamers...'
           install_for_gamers
-          msg 'Installing video editor and live stream applications...'
+          msg 'Instalando aplicativos de edição de vídeo e streaming...'
           install_video_editor_live
      }
      choose_browser_options() {
          echo
-         echo -e "${YELLOW}Choose a browser to install: ${RESET}"
+         echo -e "${YELLOW}Escolha um navegador para instalar: ${RESET}"
          echo
          echo '1 - Google Chrome'
          echo '2 - Brave'
          echo '3 - Opera'
          echo '4 - Microsoft Edge'
-         echo '5 - Install all browsers'
-         echo 'q - Skip or quit'
+         echo '5 - Instalar todos os navegadores'
+         echo 's - pular ou sair'
          echo
          while true; do
-            read -p 'Enter your choice: ' browser
+            read -p 'Digite sua escolha: ' browser
             case $browser in
                 1)
-                    msg 'Installing Google Chrome...'
+                    msg 'Instalando Google Chrome...'
                     install_google_chrome_browser
-                    msg 'Google Chrome installed successfully!'
+                    msg 'Google Chrome instalado com sucesso!'
                     break
                     ;;
                 2)
-                    msg 'Installing Brave Browser...'
+                    msg 'Instalando navegador Brave...'
                     repo_brave_browser
                     repo_update
                     install_brave_browser
-                    msg 'Brave Browser installed successfully!'
+                    msg 'Brave instalado com sucesso!'
                     break
                     ;;
                 3)
-                    msg 'Installing Opera Browser...'
+                    msg 'Instalando o navegador Opera...'
                     repo_opera_browser
                     repo_update
                     install_opera_browser
-                    msg 'Opera Browser installed successfully!'
+                    msg 'Opera instalado com successo!'
                     break
                     ;;
                 4)
-                    msg 'Installing Microsoft Edge...'
+                    msg 'Instalando o Microsoft Edge...'
                     repo_edge_browser
                     repo_update
                     install_edge_browser
-                    msg 'Microsoft Edge installed successfully!'
+                    msg 'Microsoft Edge instalado com sucesso!'
                     break
                     ;;
                 5)
-                    msg 'Setting up repositories...'
+                    msg 'Configurando os repositórios...'
                     repo_brave_browser
                     repo_opera_browser
                     repo_edge_browser
                     repo_update
-                    msg 'Installing browsers...'
+                    msg 'Instalando os navegadores...'
                     install_google_chrome_browser
                     install_brave_browser
                     install_opera_browser
                     install_edge_browser
-                    msg 'All browsers installed successfully!'
+                    msg 'Navegadores instalados com sucesso!'
                     break
                     ;;
-                q)
-                   msg 'Skipping browser installation.'
+                s)
+                   msg 'Pulando a instalação dos navegadores.'
                    break
                    ;;
                 *)
-                   error_msg 'Invalid option. Please choose a valid number or "q" to quit.'
+                   error_msg 'Opção inválida. Escolha um dos números ou "s" para sair.'
                    ;;
              esac
           done
        }
        cd_dvd_burn_option() {
                echo
-               echo -e "${YELLOW}Do you have a CD/DVD burner? (y/n) ${RESET}"
+               echo -e "${YELLOW}Você tem gravador de CD/DVD? (s/n) ${RESET}"
                echo
                while true; do
                   read choice
-                  if [[ "$choice" == 'y' || "$choice" == 'Y' ]]; then
-                      msg 'Installing CD/DVD burn applications...'
+                  if [[ "$choice" == 's' || "$choice" == 'S' ]]; then
+                      msg 'Instalando gravadores de CD/DVD...'
                       install_cd_dvd_burn
-                       msg 'CD/DVD burn applications installed successfully!'
+                       msg 'Gravadores de CD/DVD instalados com sucesso!'
                        break
                   fi
                   if [[ "$choice" == 'n' || "$choice" == 'N' ]]; then
@@ -328,145 +328,145 @@ RESET='\033[0m'
      }
      install_for_gamers() {
          echo
-         echo -e "${YELLOW}Choose what do you wanna install: ${RESET}"
+         echo -e "${YELLOW}Escolha o que gostaria de instalar: ${RESET}"
          echo
          echo '1 - Steam'
          echo '2 - Lutris'
-         echo '3 - Retroarch (for retro games)'
+         echo '3 - Retroarch (para retro games)'
          echo '4 - Moonlight'
-         echo '5 - Install all'
-         echo 'q - Skip or quit'
+         echo '5 - Instalar tudo'
+         echo 's - pular ou sair'
          echo
          while true; do
-            read -p 'Enter your choice: ' game
+            read -p 'Digite sua escolha: ' game
             case $game in
                 1)
-                    msg 'Installing Steam...'
+                    msg 'Instalando Steam...'
                     install_steam
-                    msg 'Steam installed successfully!'
+                    msg 'Steam instalada com sucesso!'
                     break
                     ;;
                 2)
-                    msg 'Installing Lutris...'
+                    msg 'Instalando Lutris...'
                     install_lutris
-                    msg 'Lutris installed successfully!'
+                    msg 'Lutris instalado com sucesso!'
                     break
                     ;;
                 3)
-                   msg 'Installing Retroarch...'
+                   msg 'Instalando Retroarch...'
                    repo_for_gamers
                    repo_update
                    install_retroarch
-                   msg 'Retroarch installed successfully!'
+                   msg 'Retroarch instalado com sucesso!'
                    break
                    ;;    
                 4)
-                    msg 'Installing Moonlight...'
+                    msg 'Instalando Moonlight...'
                     install_moonlight
-                    msg ' Moonlight installed successfully!'
+                    msg ' Moonlight instalado com sucesso!'
                     break
                     ;;
                 5)
-                    msg 'Installing all options...'
+                    msg 'Instalando todas as opções...'
                     repo_for_gamers
                     repo_update
                     install_steam
                     install_lutris
                     install_retroarch
                     install_moonlight
-                    msg 'All options installed successfully!'
+                    msg 'Todas as opções foram instaladas com sucesso!'
                     break
                     ;;
-                q)
-                   msg 'Skipping games installation.'
+                s)
+                   msg 'Pulando a instalação dos aplicativos de jogos.'
                    break
                    ;;
                 *)
-                   error_msg 'Invalid option. Please choose a valid number or "q" to quit.'
+                   error_msg 'Opção inválida. Selecione um número ou "s" para sair.'
                    ;;
              esac
           done
        }
        install_extra_packages_options() {
          echo
-         echo -e "${YELLOW}Choose what packages do you want install: ${RESET}"
+         echo -e "${YELLOW}Escolha os pacotes adicionais que deseja instalar: ${RESET}"
          echo
-         echo '1  - Install all extra packages'
-         echo '2  - Install basic design applications'
-         echo '3  - Install basic IT tools'
-         echo '4  - Install programming applications'
-         echo '5  - Install gamers apps'
-         echo '6  - Install video editor and live stream applications'
-         echo '7 - Install flathub and gnome software'
-         echo 'q - Skip or quit'
+         echo '1 - Instalar todos os pacotes'
+         echo '2 - Instalar pacote básico de design'
+         echo '3 - Instalar ferramentas básicas de TI'
+         echo '4 - Instalar aplicativos de programação'
+         echo '5 - Instalar aplicativos para gamers'
+         echo '6 - Instalar editores de video e ferramentas de stream'
+         echo '7 - Instalar flathub and gnome software'
+         echo 's - Pular ou sair'
          echo
          while true; do
-            read -p "Enter your choices (separate with spaces, e.g., '2 3 5'): " extra_pack
+            read -p "Digite suas escolhas (separadas com espaço, ex: 2 3 5): " extra_pack
 
              for choice in $extra_pack; do
                  case "$choice" in
                      1)
                          install_all_extra_packages
-                         msg 'All packages installed successfully!'
+                         msg 'Todos os pacotes foram instalados com sucesso!'
                          ;;
                      2)
                          msg 'Installing design applications...'
                          repo_update
                          install_design_applications
-                         msg 'Design applications installed successfully!'
+                         msg 'Aplicativos básicos de design instalados com sucesso!'
                          ;;
                      3)
-                         msg 'Installing IT tools...'
+                         msg 'Instalando ferramentas de TI...'
                          repo_it_tools
                          repo_update
                          install_it_tools
-                         msg 'IT tools installed successfully!'
+                         msg 'Ferramentas de TI instaladas com sucesso!'
                          ;;
                      4)
-                         msg 'Installing programming applications...'
+                         msg 'Instalando aplicativos de programação...'
                          repo_programming_applications
                          repo_update
                          install_programming_applications
-                         msg 'Programming applications installed successfully!'
+                         msg 'Aplicativos de programação instalados com sucesso!'
                          ;;
                      5)
                          repo_update
                          install_for_gamers
-                         msg 'Gamers apps installed successfully!'
+                         msg 'Aplicativos gamers instalados com sucesso!'
                          ;;
                      6)
-                         msg 'Installing video editor and live stream applications...'
+                         msg 'Instalando aplicativos de edição de vídeo e streaming...'
                          repo_update
                          install_video_editor_live
-                         msg 'Video editor and live stream applications installed successfully!'
+                         msg 'Aplicativos instalados com sucesso!'
                          ;;
                      7)
-                         msg 'Setting flathub and gnome store...'
+                         msg 'Configurando flathub and gnome store...'
                          system_update
                          setup_flathub
-                         msg 'Successfully configured!'
+                         msg 'Configurados com sucesso!'
                          ;;
-                     q)
-                         msg 'Skipping installation.'
+                     s)
+                         msg 'Pulando a instalação...'
                          break
                          ;;
                      *)
-                         msg 'Invalid choice: $choice'
+                         msg 'Escolha inválida: $choice'
                          ;;
                  esac
              done
 	     
-             msg 'Installation process finished. Exiting...'
+             msg 'Processo de instalação finalizado. Saindo...'
              break 
          done
      }
 	 choose_extra_packages() {
           echo
-          echo -e "${YELLOW}Do you wish install extra application packages? ${RESET}"
+          echo -e "${YELLOW}Você deseja instalar pacotes de aplicativos adicionais? ${RESET}"
           echo
           while true; do
-             read -p 'Enter your option (y/n): ' ext_choice
-             if [[ "$ext_choice" == 'y' || "$ext_choice" == 'Y' ]]; then
+             read -p 'Digite sua escolha (s/n): ' ext_choice
+             if [[ "$ext_choice" == 's' || "$ext_choice" == 'S' ]]; then
                    install_extra_packages_options
                    break
              fi
@@ -477,43 +477,43 @@ RESET='\033[0m'
        }
        
 # ─────────────────────────────────────────────────────────────────────────────
-# Download and Configuration folders and github repositories
+# Download e configuração de pastas e repositórios
 # ─────────────────────────────────────────────────────────────────────────────
      dotfiles_repository_begginer_common() {
         echo
-        echo -e "${YELLOW}Whats your user? ${RESET}"
+        echo -e "${YELLOW}Qual é o seu usuário? ${RESET}"
         echo
-        read -p 'Enter the username that you choose on system installation: ' user_common
+        read -p 'Digite o nome de usuário configurado na instalação do sistema: ' user_common
         # Check if the user exists
         if id "$user_common" &>/dev/null; then
         sudo -u "$user_common" bash <<EOF
-        msg 'Configuring the dotfiles...'
-	    git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
+        msg 'Configurando os dotfiles...'
+	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
         cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.bashrc.ori
         stow bash
         source /home/$user_common/.bashrc
-        msg 'creating folders to files organization...'
-        msg  'Creating folders to Downloads...'
+        msg 'criando pastas para organização dos seus arquivos...'
+        msg  'Criando pastas em Downloads...'
         mkdir /home/$user_common/Downloads/Torrent
         mkdir /home/$user_common/Downloads/Youtube
-        mkdir /home/$user_common/Downloads/Apps
+        mkdir /home/$user_common/Downloads/Aplicativos
         mkdir /home/$user_common/Downloads/ISOs
-        mkdir /home/$user_common/Downloads/Images
-        mkdir /home/$user_common/Downloads/Work
-        mkdir /home/$user_common/Downloads/Others
-        mkdir /home/$user_common/Downloads/Music
-        msg  'Creating folders to shared with VM on Virtualbox...'
-        mkdir /home/$user_common/Documents/VM\ Shared
-        msg 'Creating folders to Pictures...'
-        mkdir /home/$user_common/Pictures/Google\ Photos
-        mkdir /home/$user_common/Pictures/Personal\ Pictures
-        mkdir /home/$user_common/Pictures/Internet\ Images
+        mkdir /home/$user_common/Downloads/Imagens
+        mkdir /home/$user_common/Downloads/Trabalho
+        mkdir /home/$user_common/Downloads/Outros
+        mkdir /home/$user_common/Downloads/Música
+        msg  'Criando pastas para compartilhamento de arquivos com VM do Virtualbox...'
+        mkdir /home/$user_common/Documentos/VM\ Shared
+        msg 'Criando pastas para Imagens...'
+        mkdir /home/$user_common/Imagens/Google\ Photos
+        mkdir /home/$user_common/Imagens/Fotos
+        mkdir /home/$user_common/Imagens/Imagens\ da\ Internet
         mkdir /home/$user_common/.Wallpapers
-        msg 'Configuration applied successfully!'
+        msg 'Configurações aplicadas com sucesso!'
 EOF
 	else
-        echo -e "${RED}User $user_common does not exist. ${RESET}"
+        echo -e "${RED}O usuário $user_common não existe. ${RESET}"
         echo    
     fi
     }
@@ -525,21 +525,21 @@ EOF
         rm -fr /opt/automation/scripts/scripts
         mv /opt/automation/scripts/scripts_b /opt/automation/scripts/scripts
         stow scripts
-        msg 'You can found scripts in /opt/scripts.'
-        msg 'Configuration applied successfully!'    
+        msg 'Você irá encontrar os scripts na pasta /opt/scripts.'
+        msg 'Configuração aplicada com sucesso!'    
     }
     dotfiles_repository_advanced_all() {
         echo
-        echo -e "${YELLOW}Whats your user? ${RESET}"
+        echo -e "${YELLOW}Qual é o seu usuário? ${RESET}"
         echo
-        read -p 'Enter the username that you choose on system installation: ' user_common
+        read -p 'Digite o nome de usuário configurado na instalação do sistema: ' user_common
         # Check if the user exists
         if id "$user_common" &>/dev/null; then
         sudo -u "$user_common" bash <<EOF
-        msg 'Configuring the dotfiles...'
-	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
-	touch .tmux.conf
-	mkdir -p ~/.config/tmux/plugins/catppuccin
+        msg 'Configurando os dotfiles...'
+	    git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
+	    touch .tmux.conf
+	    mkdir -p ~/.config/tmux/plugins/catppuccin
         git clone -b v2.1.0 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
         cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.bashrc.ori
@@ -549,27 +549,27 @@ EOF
         source /home/$user_common/.bashrc
         source /home/$user_common/.tmux.conf
         source /home/$user_common/.conf/alacritty.toml
-        msg 'creating folders to files organization...'
-        msg  'Creating folders to Downloads...'
+        msg 'criando pastas para organização dos seus arquivos...'
+        msg  'Criando pastas em Downloads...'
         mkdir /home/$user_common/Downloads/Torrent
         mkdir /home/$user_common/Downloads/Youtube
-        mkdir /home/$user_common/Downloads/Apps
+        mkdir /home/$user_common/Downloads/Aplicativos
         mkdir /home/$user_common/Downloads/ISOs
-        mkdir /home/$user_common/Downloads/Images
-        mkdir /home/$user_common/Downloads/Work
-        mkdir /home/$user_common/Downloads/Others
-        mkdir /home/$user_common/Downloads/Music
-        msg  'Creating folders to shared with VM on Virtualbox...'
-        mkdir /home/$user_common/Documents/VM\ Shared
-        msg 'Creating folders to Pictures...'
-        mkdir /home/$user_common/Pictures/Google\ Photos
-        mkdir /home/$user_common/Pictures/Personal\ Pictures
-        mkdir /home/$user_common/Pictures/Internet\ Images
+        mkdir /home/$user_common/Downloads/Imagens
+        mkdir /home/$user_common/Downloads/Trabalho
+        mkdir /home/$user_common/Downloads/Outros
+        mkdir /home/$user_common/Downloads/Música
+        msg  'Criando pastas para compartilhamento de arquivos com VM do Virtualbox...'
+        mkdir /home/$user_common/Documentos/VM\ Shared
+        msg 'Criando pastas para Imagens...'
+        mkdir /home/$user_common/Imagens/Google\ Photos
+        mkdir /home/$user_common/Imagens/Fotos
+        mkdir /home/$user_common/Imagens/Imagens\ da\ Internet
         mkdir /home/$user_common/.Wallpapers
-        msg 'Configuration applied successfully!'
+        msg 'Configurações aplicadas com sucesso!'
 EOF
 	else
-        echo "User $user_common does not exist."
+        echo "O usuário $user_common não existe."
         echo
     fi
     }
@@ -580,8 +580,8 @@ EOF
         cd /opt/automation/
         rm -fr /opt/automation/scripts/scripts_b
         stow scripts
-        msg 'You can found scripts in /opt/scripts.'
-        msg 'Configuration applied successfully!'    
+        msg 'Você irá encontrar os scripts na pasta /opt/scripts.'
+        msg 'Configuração aplicada com sucesso!'    
     }
  
 # ─────────────────────────────────────────────────────────────────────────────
@@ -589,11 +589,11 @@ EOF
 # ─────────────────────────────────────────────────────────────────────────────
     ssh_port_configuration() {
         echo
-        echo -e "${YELLOW}Choose a new SSH port access for security ${RESET}" 
+        echo -e "${YELLOW}Escolha uma nova porta para acesso SSH por segurança! ${RESET}" 
         echo
-        read -p 'Enter the port number to change or leave blank to default: ' ssh_port
+        read -p 'Digite a porta para mudar ou deixe em branco para manter a padrão: ' ssh_port
         if [[ -n "$ssh_port" && "$ssh_port" =~ ^[0-9]+$ ]]; then
-             echo "Configuring SSH to use port $ssh_port..."
+             echo "Configurando o SSH para usar a porta $ssh_port..."
         
              # Backup of configuration file
              sudo cp /etc/ssh/ssh_config /etc/ssh/sshd_config.bak
@@ -604,10 +604,10 @@ EOF
 
              # Restart service to apply change
              sudo systemctl restart ssh
-             msg "SSH port updated to $ssh_port successfully!"
+             msg "Porta do SSH alterada para $ssh_port com successo!"
         else
-             msg "No changes made to SSH configuration."
-             msg "The ssh access will use port 22."
+             msg "Sem mudanças para fazer na configuração do SSH."
+             msg "O protocolo SSH usará a porta 22."
         fi
    }
    
@@ -617,11 +617,11 @@ EOF
 
     ask_reboot() {
       echo
-      echo -e "${YELLOW}Want to restart now? ${RESET}"
+      echo -e "${YELLOW}Deseja reiniciar agora? ${RESET}"
       echo
       while true; do
-         read -p 'Enter your option (y/n): ' choice
-         if [[ "$choice" == 'y' || "$choice" == 'Y' ]]; then
+         read -p 'Digite sua opção (s/n): ' choice
+         if [[ "$choice" == 's' || "$choice" == 'S' ]]; then
                    reboot
                    exit 0
          fi
@@ -632,7 +632,7 @@ EOF
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Message function
+# Função de mensagem
 # ─────────────────────────────────────────────────────────────────────────────
 
     msg() {
@@ -648,42 +648,42 @@ EOF
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Show banner and menu
+# Mostrar banner e menu
 # ─────────────────────────────────────────────────────────────────────────────
 
     print_banner() {
         echo -e "${GREEN}
         
  ╔════════════════════════════════════════════════════════════════════════╗
- ║                  Post Installation Setup                               ║
+ ║                  Script de Pós Instalação                              ║
  ║                                                                        ║
  ║                                                                        ║
- ║ By: Kevin Oliveira                                                     ║
- ║ Script version: 1.0                                                    ║
+ ║ Feito por: Kevin Oliveira                                              ║
+ ║ Versão do script: 1.0                                                  ║
  ╚════════════════════════════════════════════════════════════════════════╝
     
         ${RESET}"
     }
 
     show_menu() {
-        echo -e "${ORANGE}Choose what to do: ${RESET}"
+        echo -e "${ORANGE}Selecione o que deseja fazer: ${RESET}"
         echo
-        echo -e "${ORANGE}Configuration profiles: ${RESET}"
-        echo '1  - Apply everything' 
-        echo '2  - Setup for common users'
-        echo '3  - Setup for advanced users'
-        echo '4  - Setup for begginer users'
-        echo -e "${ORANGE}Customization options: ${RESET}"
-        echo '5  - Disable terminal ads (LTS versions)'
-        echo '6  - Unlock more options on startup manager'
-        echo -e "${ORANGE}Application packages: ${RESET}"
-        echo '7  - Install extra application packages'
-        echo 'q  - Exit'
+        echo -e "${ORANGE}Perfis de Configuração: ${RESET}"
+        echo '1  - Aplicar todas as configurações' 
+        echo '2  - Configurar para um usuário comum'
+        echo '3  - Configurar para um usuário avançado'
+        echo '4  - Configurar para um usuário iniciante'
+        echo -e "${ORANGE}Opções de Personalização: ${RESET}"
+        echo '5  - Desabilitar ADS no terminal (Versões LTS)'
+        echo '6  - Desbloquear mais opções no gerenciador de inicialização'
+        echo -e "${ORANGE}Pacotes de Aplicativos: ${RESET}"
+        echo '7  - Instalar pacotes de aplicativos adicionais'
+        echo 's  - Sair'
         echo
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Functions of the script task execution
+# Funções para o script executar as tarefas
 # ─────────────────────────────────────────────────────────────────────────────
 
     main() {
@@ -691,201 +691,203 @@ EOF
        while true; do
          print_banner
          show_menu
-         read -p 'Enter your choice: ' choice
+         read -p 'Digite sua escolha: ' choice
          case $choice in
          1)
              auto
-             msg 'Settings applied successfully!'
+             msg 'Configurações aplicadas com sucesso!'
              ask_reboot
              ;;
          2)
              common_user
-             msg 'Settings applied successfully!'
+             msg 'Configurações aplicadas com sucesso!'
              ask_reboot
              ;;
          3)
              advanced_user
-             msg 'Settings applied successfully!'
+             msg 'Configurações aplicadas com sucesso!'
              ask_reboot
              ;;
          4)
              begginer_user
-             msg 'Settings applied successfully!'
+             msg 'Configurações aplicadas com sucesso!'
              ask_reboot
              ;;
          5)
-             msg 'Disabling Terminal ADS...'
+             msg 'Desabilitando ADS no terminal...'
              disable_terminal_ads
-             msg 'ADS disabled successfully!'
+             msg 'ADS desabilitado com sucesso!'
              ;;
          6)
-             msg 'Unlocking options on startup manager...'
+             msg 'Desbloqueando opções no gerenciador de inicialização...'
              startup_manager
-             msg 'Unlocked options successfully!'
+             msg 'Opções desbloqueadas com sucesso!'
              ;;     
          7)
              install_extra_packages_options
              ;;             
-         q)
-             msg 'See you soon!'
+         s)
+             msg 'Até mais!'
              exit 0
              ;;
          *)
-             error_msg 'Invalid option. Please choose a valid number or "q" to quit.'
+             error_msg 'Opção inválida. Por favor, escolha um número ou "s" para sair.'
          esac
        done
 
     }
         
     auto() {
-	msg 'Update repository...'
+	msg 'Atualizando os repositórios...'
         repo_update
-        msg 'setting up repositories...'
+	msg 'Configurando os repositórios...'
         repo_it_tools
-	repo_programming_applications
+        repo_programming_applications
 	repo_for_gamers
-        msg 'Update repository...'
+        msg 'Atualizando os repositórios...'
         repo_update
-        msg 'Setting up flathub'
+        msg 'Configurando flathub'
         setup_flathub
-        msg 'Updating applications...'
+        msg 'Atualizando os aplicativos...'
         system_update
-        msg 'Upgrading system...'
+        msg 'Atualizando o sistema...'
         dist_upgrade
-        msg 'Removing terminal ads (if they are enable)...'
+        msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
-	msg 'Installing essentials tools...'
+	msg 'Instalando ferramentas essenciais...'
         install_essentials_tools
-	msg 'Installing advanced tools...'
+	msg 'Instalando ferramentas avançadas...'
         install_advanced_tools
-        msg 'Installing basic applications...'
+        msg 'Instalando aplicativos básicos...'
         install_basic_applications
         choose_browser_options
         cd_dvd_burn_option
-	msg 'Installing design applications...'
+	msg 'Instalando aplicativos básicos de design...'
         install_design_applications
-        msg 'Installing IT applications...'
+        msg 'Instalando aplicativos de TI...'
         install_it_tools
-        msg 'Installing programming applications...'
+        msg 'Instalando aplicativos de programação...'
         install_programming_applications
-        msg 'Installing video applications...'
+        msg 'Instalando aplicativos de vídeo e streaming...'
         install_video_editor_live
-        msg 'Installing games store and emulators...'
+        msg 'Instalando lojas de jogos e emuladores...'
         install_steam
         install_lutris
         install_retroarch
         install_moonlight
-	msg 'Updating applications...'
+        msg 'Atualizando os aplicativos...'
         system_update
-        msg 'Updating snap packages...'
+        msg 'Atualizando os pacotes snap...'
         snap_update
-        msg 'Updating flatpak packages...'
+        msg 'Atualizando os pacotes flatpak...'
         flatpak_update
-        msg 'Unlocking more options on startup manager...'
+        msg 'Desbloqueando mais opções no gerenciador de inicialização...'
         startup_manager
-        msg 'SSH configuration...'
+        msg 'Configurando SSH...'
         ssh_port_configuration
-        msg 'configuring the system...'
+        msg 'Configurando o sistema...'
         dotfiles_repository_advanced_all
-        msg 'Downloading automation scripts...'
+        msg 'Baixando scripts para automação...'
         scripts_repository_advanced_all
-        msg 'Cleaning up...'
+        msg 'Limpando...'
         cleanup
     }
 
     common_user() {
-        msg 'Updating repositories...'
+        msg 'Atualizando os repositórios...'
         repo_update
-        msg 'Setting up flathub...'
+        msg 'Configurando o flathub...'
         setup_flathub
-        msg 'Removing terminal ads (if they are enable)...'
+        msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
-        msg 'Installing essentials tools...'
+        msg 'Instalando ferramentas essenciais...'
         install_essentials_tools
-        msg 'Installing basic applications...'
+        msg 'Instalando aplicativos básicos...'
         install_basic_applications
         choose_browser_options
         cd_dvd_burn_option
-        msg 'Updating applications...'
+        msg 'Atualizando os aplicativos...'
         system_update
-        msg 'Updating snap packages...'
+        msg 'Atualizando os pacotes snap...'
         snap_update
-        msg 'Updating flatpak packages...'
+        msg 'Atualizando os pacotes flatpak...'
         flatpak_update
-        msg 'Unlocking more options on startup manager...'
+        msg 'Desbloqueando mais opções no gerenciador de inicialização...'
         startup_manager
-        msg 'SSH configuration...'
+        msg 'Configurando o SSH...'
         ssh_port_configuration
         choose_extra_packages
-        msg 'configuring the system...'
+        msg 'configurando o sistema...'
         dotfiles_repository_begginer_common
-        msg 'Downloading automation scripts...'
+        msg 'Baixando scripts para automação...'
         scripts_repository_common_begginer
-        msg 'Cleaning up...'
+        msg 'Limpando...'
         cleanup
     }
     advanced_user() {
-        msg 'Updating repositories...'
+        msg 'Atualizando os repositórios...'
         repo_update
-        msg 'Setting up flathub...'
+        msg 'Configurando o flathub...'
         setup_flathub
-        msg 'Removing terminal ads (if they are enable)...'
+        msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
-        msg 'Installing essentials tools...'
+        msg 'Instalando as ferramentas essenciais...'
         install_essentials_tools
-	msg 'Installing advanced tools...'
+	msg 'Instalando as ferramentas avançadas...'
         install_advanced_tools
-        msg 'Installing basic applications...'
+        msg 'Instalando os aplicativos básicos...'
         install_basic_applications
         choose_browser_options
         cd_dvd_burn_option
-        msg 'Updating applications...'
+        msg 'Atualizando os aplicativos...'
         system_update
-        msg 'Updating snap packages...'
+        msg 'Atualizando os pacotes snap...'
         snap_update
-        msg 'Updating flatpak packages...'
+        msg 'Atualizando os pacotes flatpak...'
         flatpak_update
-        msg 'Unlocking more options on startup manager...'
+        msg 'Desbloqueando mais opções no gerenciador de inicialização...'
         startup_manager
-        msg 'SSH configuration...'
+        msg 'Configurando o SSH...'
         ssh_port_configuration
         choose_extra_packages
-        msg 'configuring the system...'
+        msg 'configurando o sistema...'
         dotfiles_repository_advanced_all
-        msg 'Downloading automation scripts...'
+        msg 'Baixando os scripts para automação...'
         scripts_repository_advanced_all
-        msg 'Cleaning up...'
+        msg 'Limpando...'
         cleanup
     }
     begginer_user() {
-        msg 'Updating repositories...'
+        msg 'Atualizando os repositórios...'
         repo_update
-        msg 'Setting up flathub...'
+        msg 'Configurando o flathub...'
         setup_flathub
-        msg 'Removing terminal ads (if they are enable)...'
+        msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
-        msg 'Installing essentials tools...'
+        msg 'Instalando as ferramentas essenciais...'
         install_essentials_tools
-        msg 'Installing basic applications...'
+	msg 'Instalando as ferramentas avançadas...'
+        install_advanced_tools
+        msg 'Instalando os aplicativos básicos...'
         install_basic_applications
         choose_browser_options
         cd_dvd_burn_option
-        msg 'Updating applications...'
+        msg 'Atualizando os aplicativos...'
         system_update
-        msg 'Updating snap packages...'
+        msg 'Atualizando os pacotes snap...'
         snap_update
-        msg 'Updating flatpak packages...'
+        msg 'Atualizando os pacotes flatpak...'
         flatpak_update
-        msg 'Unlocking more options on startup manager...'
+        msg 'Desbloqueando mais opções no gerenciador de inicialização...'
         startup_manager
-        msg 'SSH configuration...'
+        msg 'Configurando o SSH...'
         ssh_port_configuration
         choose_extra_packages
-        msg 'configuring the system...'
-        dotfiles_repository_begginer_common
-        msg 'Downloading automation scripts...'
-        scripts_repository_common_begginer
-        msg 'Cleaning up...'
+        msg 'configurando o sistema...'
+        dotfiles_repository_advanced_all
+        msg 'Baixando os scripts para automação...'
+        scripts_repository_advanced_all
+        msg 'Limpando...'
         cleanup
     }
     
