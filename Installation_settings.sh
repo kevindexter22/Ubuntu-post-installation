@@ -106,9 +106,6 @@ RESET='\033[0m'
         wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/keyrings/anydesk.gpg
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
         
-        # Balena Etcher
-        curl -1sLf 'https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh' | sudo -E bash
-        
         # Virtualbox
         echo -e "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian jammy contrib"|sudo tee /etc/apt/sources.list.d/virtualbox.list
         wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
@@ -151,7 +148,7 @@ RESET='\033[0m'
 # ─────────────────────────────────────────────────────────────────────────────
 
     install_essentials_tools() {
-        apt install aptitude curl htop net-tools snapd gparted timeshift cpu-x gdebi git vim apt-transport-https binutils preload software-properties-common default-jdk ubuntu-restricted-extras stow traceroute ssh gnupg2 ca-certificates tree -y
+        apt install aptitude curl htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim apt-transport-https binutils preload software-properties-common default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates tree -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
         # Microsoft Fonts
@@ -162,11 +159,11 @@ RESET='\033[0m'
     }
   
     install_advanced_tools() {
-       apt install nmap nload alacritty tmux dnsenum dnsutils mtr iperf3 lynis nethogs rkhunter -y
+       apt install nmap alacritty tmux dnsenum lynis nethogs rkhunter -y
     }
     
     install_basic_applications() {
-        apt install libreoffice youtubedl-gui qbittorrent vlc winff thunderbird gnome-shell-extensions arandr -y
+        apt install libreoffice audacity youtubedl-gui qbittorrent vlc winff thunderbird gnome-shell-extensions arandr -y
         sudo snap install foliate
     }
 
@@ -192,14 +189,13 @@ RESET='\033[0m'
     }
     
     install_it_tools() {
-        sudo aptitude install dia dia-* rpi-imager anydesk build-essential dkms virtualbox-7.1 wireshark -y 
+        aptitude install dia rpi-imager anydesk virtualbox wireshark -y
         wget --max-redirect 100 https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
         sudo dpkg -i balena-etcher_*
         apt --fix-broken install
         rm -fr balena-etcher_*
         sudo snap install core
         sudo snap install drawio
-        sudo snap install woe-usb --edge
     }
     install_cd_dvd_burn() {
         aptitude install brasero k3b -y
