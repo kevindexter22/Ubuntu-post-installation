@@ -518,8 +518,7 @@ EOF
         cd /opt
         git clone https://github.com/kevindexter22/automation.git
         cd /opt/automation/
-        rm -fr /opt/automation/scripts/scripts
-        mv /opt/automation/scripts/scripts_b /opt/automation/scripts/scripts
+        rm -fr /opt/automation/scripts/scripts_pt-br
         stow scripts
         msg 'You can found scripts in /opt/scripts.'
         msg 'Configuration applied successfully!'    
@@ -553,8 +552,9 @@ EOF
         mkdir /home/$user_common/Downloads/Work
         mkdir /home/$user_common/Downloads/Others
         mkdir /home/$user_common/Downloads/Music
-        msg  'Creating folders to shared with VM on Virtualbox...'
+        msg  'Creating folders to Documents...'
         mkdir /home/$user_common/Documents/VM\ Shared
+        mkdir /home/$user_common/Documents/PDF
         msg 'Creating folders to Pictures...'
         mkdir /home/$user_common/Pictures/Google\ Photos
         mkdir /home/$user_common/Pictures/Personal\ Pictures
@@ -572,7 +572,7 @@ EOF
         cd /opt
         git clone https://github.com/kevindexter22/automation.git
         cd /opt/automation/
-        rm -fr /opt/automation/scripts/scripts_b
+        rm -fr /opt/automation/scripts/scripts_pt-br
         stow scripts
         msg 'You can found scripts in /opt/scripts.'
         msg 'Configuration applied successfully!'    

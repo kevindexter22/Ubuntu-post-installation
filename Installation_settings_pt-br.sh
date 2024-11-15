@@ -22,7 +22,7 @@ BLUE='\033[0;34m'
 
 GRAY='\033[1;30m'
 
-RESET='\033[0m'
+RESET='\033[0m' 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Função para validar se o script está rodando como root
@@ -37,7 +37,7 @@ RESET='\033[0m'
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Functions of update
+# Funções de atualização
 # ─────────────────────────────────────────────────────────────────────────────    
 
     dist_upgrade() {
@@ -519,7 +519,7 @@ EOF
         git clone https://github.com/kevindexter22/automation.git
         cd /opt/automation/
         rm -fr /opt/automation/scripts/scripts
-        mv /opt/automation/scripts/scripts_b /opt/automation/scripts/scripts
+        mv /opt/automation/scripts/scripts_pt-br /opt/automation/scripts/scripts
         stow scripts
         msg 'Você irá encontrar os scripts na pasta /opt/scripts.'
         msg 'Configuração aplicada com sucesso!'    
@@ -553,8 +553,9 @@ EOF
         mkdir /home/$user_common/Downloads/Trabalho
         mkdir /home/$user_common/Downloads/Outros
         mkdir /home/$user_common/Downloads/Música
-        msg  'Criando pastas para compartilhamento de arquivos com VM do Virtualbox...'
+        msg  'Criando pastas em Documentos...'
         mkdir /home/$user_common/Documentos/VM\ Shared
+        mkdir /home/$user_common/Documentos/PDF
         msg 'Criando pastas para Imagens...'
         mkdir /home/$user_common/Imagens/Google\ Photos
         mkdir /home/$user_common/Imagens/Fotos
@@ -572,14 +573,15 @@ EOF
         cd /opt
         git clone https://github.com/kevindexter22/automation.git
         cd /opt/automation/
-        rm -fr /opt/automation/scripts/scripts_b
+        rm -fr /opt/automation/scripts/scripts
+        mv /opt/automation/scripts/scripts_pt-br /opt/automation/scripts/scripts
         stow scripts
         msg 'Você irá encontrar os scripts na pasta /opt/scripts.'
         msg 'Configuração aplicada com sucesso!'    
     }
  
 # ─────────────────────────────────────────────────────────────────────────────
-# Customized Configuration
+# Configurações personalizadas
 # ─────────────────────────────────────────────────────────────────────────────
     ssh_port_configuration() {
         echo
@@ -606,7 +608,7 @@ EOF
    }
    
 # ─────────────────────────────────────────────────────────────────────────────
-# Restart function
+# Reiniciar a máquina
 # ─────────────────────────────────────────────────────────────────────────────
 
     ask_reboot() {
