@@ -484,9 +484,9 @@ RESET='\033[0m'
         if id "$user_common" &>/dev/null; then
         sudo -u "$user_common" bash <<EOF
         msg 'Configuring the dotfiles...'
-	    git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
+	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
         cd /home/$user_common/dotfiles/
-        mv /home/$user_common/.bashrc /home/$user_common/.bashrc.ori
+        mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
         source /home/$user_common/.bashrc
         msg 'creating folders to files organization...'
@@ -534,17 +534,15 @@ EOF
         sudo -u "$user_common" bash <<EOF
         msg 'Configuring the dotfiles...'
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
-	touch .tmux.conf
-	mkdir -p ~/.config/tmux/plugins/catppuccin
-        git clone -b v2.1.0 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
-        cd /home/$user_common/dotfiles/
-        mv /home/$user_common/.bashrc /home/$user_common/.bashrc.ori
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	cd /home/$user_common/dotfiles/
+        mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
         stow alacritty
         stow tmux
         source /home/$user_common/.bashrc
         source /home/$user_common/.tmux.conf
-        source /home/$user_common/.conf/alacritty.toml
+        source /home/$user_common/.conf/alacritty/alacritty.toml
         msg 'creating folders to files organization...'
         msg  'Creating folders to Downloads...'
         mkdir /home/$user_common/Downloads/Torrent
