@@ -556,6 +556,7 @@ EOF
         msg  'Criando pastas em Documentos...'
         mkdir /home/$user_common/Documentos/VM\ Shared
         mkdir /home/$user_common/Documentos/PDF
+        mkdir /home/$user_common/Documentos/PDF/Otimizados
         msg 'Criando pastas para Imagens...'
         mkdir /home/$user_common/Imagens/Google\ Photos
         mkdir /home/$user_common/Imagens/Fotos

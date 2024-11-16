@@ -555,6 +555,7 @@ EOF
         msg  'Creating folders to Documents...'
         mkdir /home/$user_common/Documents/VM\ Shared
         mkdir /home/$user_common/Documents/PDF
+        mkdir /home/$user_common/Documents/PDF/Optimized
         msg 'Creating folders to Pictures...'
         mkdir /home/$user_common/Pictures/Google\ Photos
         mkdir /home/$user_common/Pictures/Personal\ Pictures
