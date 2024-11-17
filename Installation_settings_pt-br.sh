@@ -523,6 +523,7 @@ EOF
         rm -fr /opt/automation/scripts/scripts
         mv /opt/automation/scripts/scripts_pt-br /opt/automation/scripts/scripts
         stow scripts
+        sudo chmod +x /opt/scripts/*.sh
         msg 'Você irá encontrar os scripts na pasta /opt/scripts.'
         msg 'Configuração aplicada com sucesso!'    
     }
@@ -579,6 +580,7 @@ EOF
         rm -fr /opt/automation/scripts/scripts
         mv /opt/automation/scripts/scripts_pt-br /opt/automation/scripts/scripts
         stow scripts
+        sudo chmod +x /opt/scripts/*.sh
         msg 'Você irá encontrar os scripts na pasta /opt/scripts.'
         msg 'Configuração aplicada com sucesso!'    
     }

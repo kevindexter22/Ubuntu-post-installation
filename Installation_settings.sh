@@ -522,6 +522,7 @@ EOF
         cd /opt/automation/
         rm -fr /opt/automation/scripts/scripts_pt-br
         stow scripts
+        sudo chmod +x /opt/scripts/*.sh
         msg 'You can found scripts in /opt/scripts.'
         msg 'Configuration applied successfully!'    
     }
@@ -577,6 +578,7 @@ EOF
         cd /opt/automation/
         rm -fr /opt/automation/scripts/scripts_pt-br
         stow scripts
+        sudo chmod +x /opt/scripts/*.sh
         msg 'You can found scripts in /opt/scripts.'
         msg 'Configuration applied successfully!'    
     }
@@ -597,7 +599,7 @@ EOF
         
              # Change the ssh port on file.conf
              sudo sed -i "/^#Port 22/c\Port $ssh_port" /etc/ssh/sshd_config
-			 sudo echo Port $ssh_port >> /etc/ssh/sshd_config
+	     sudo echo Port $ssh_port >> /etc/ssh/sshd_config
 
              # Restart service to apply change
              sudo systemctl restart ssh
