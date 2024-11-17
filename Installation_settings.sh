@@ -146,9 +146,11 @@ RESET='\033[0m'
 # ─────────────────────────────────────────────────────────────────────────────
 # Installing applications and tools
 # ─────────────────────────────────────────────────────────────────────────────
-
+    install_repo_tools() {
+       apt install curl apt-transport-https software-properties-common -y
+    }
     install_essentials_tools() {
-        apt install aptitude curl htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim apt-transport-https binutils preload software-properties-common default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates tree -y
+        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates tree -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
         # Microsoft Fonts
@@ -249,13 +251,14 @@ RESET='\033[0m'
          echo 'q - Skip or quit'
          echo
          while true; do
-            read -p 'Enter your choice: ' browser
-            case $browser in
+            read -p "Enter your choices (separate with spaces, e.g., '2 3 5'): " browser
+
+             for choice in $browser; do
+                 case "$choice" in
                 1)
                     msg 'Installing Google Chrome...'
                     install_google_chrome_browser
                     msg 'Google Chrome installed successfully!'
-                    break
                     ;;
                 2)
                     msg 'Installing Brave Browser...'
@@ -263,7 +266,6 @@ RESET='\033[0m'
                     repo_update
                     install_brave_browser
                     msg 'Brave Browser installed successfully!'
-                    break
                     ;;
                 3)
                     msg 'Installing Opera Browser...'
@@ -271,7 +273,6 @@ RESET='\033[0m'
                     repo_update
                     install_opera_browser
                     msg 'Opera Browser installed successfully!'
-                    break
                     ;;
                 4)
                     msg 'Installing Microsoft Edge...'
@@ -279,7 +280,6 @@ RESET='\033[0m'
                     repo_update
                     install_edge_browser
                     msg 'Microsoft Edge installed successfully!'
-                    break
                     ;;
                 5)
                     msg 'Setting up repositories...'
@@ -293,7 +293,6 @@ RESET='\033[0m'
                     install_opera_browser
                     install_edge_browser
                     msg 'All browsers installed successfully!'
-                    break
                     ;;
                 q)
                    msg 'Skipping browser installation.'
@@ -304,6 +303,9 @@ RESET='\033[0m'
                    ;;
              esac
           done
+             msg 'Installation process finished. Exiting...'
+             break 
+         done
        }
        cd_dvd_burn_option() {
                echo
@@ -334,19 +336,19 @@ RESET='\033[0m'
          echo 'q - Skip or quit'
          echo
          while true; do
-            read -p 'Enter your choice: ' game
-            case $game in
+            read -p "Enter your choices (separate with spaces, e.g., '2 3 5'): " game
+
+             for choice in $game; do
+                 case "$choice" in
                 1)
                     msg 'Installing Steam...'
                     install_steam
                     msg 'Steam installed successfully!'
-                    break
                     ;;
                 2)
                     msg 'Installing Lutris...'
                     install_lutris
                     msg 'Lutris installed successfully!'
-                    break
                     ;;
                 3)
                    msg 'Installing Retroarch...'
@@ -354,13 +356,11 @@ RESET='\033[0m'
                    repo_update
                    install_retroarch
                    msg 'Retroarch installed successfully!'
-                   break
                    ;;    
                 4)
                     msg 'Installing Moonlight...'
                     install_moonlight
                     msg ' Moonlight installed successfully!'
-                    break
                     ;;
                 5)
                     msg 'Installing all options...'
@@ -371,7 +371,6 @@ RESET='\033[0m'
                     install_retroarch
                     install_moonlight
                     msg 'All options installed successfully!'
-                    break
                     ;;
                 q)
                    msg 'Skipping games installation.'
@@ -382,6 +381,9 @@ RESET='\033[0m'
                    ;;
              esac
           done
+             msg 'Installation process finished. Exiting...'
+             break 
+         done
        }
        install_extra_packages_options() {
          echo
@@ -735,6 +737,8 @@ EOF
     auto() {
 	msg 'Update repository...'
         repo_update
+        msg 'Installing tools to add repositories...'
+        install_repo_tools
         msg 'setting up repositories...'
         repo_it_tools
 	repo_programming_applications
@@ -766,10 +770,7 @@ EOF
         msg 'Installing video applications...'
         install_video_editor_live
         msg 'Installing games store and emulators...'
-        install_steam
-        install_lutris
-        install_retroarch
-        install_moonlight
+        install_for_gamers
 	msg 'Updating applications...'
         system_update
         msg 'Updating snap packages...'
@@ -791,6 +792,8 @@ EOF
     common_user() {
         msg 'Updating repositories...'
         repo_update
+        msg 'Installing tools to add repositories...'
+        install_repo_tools
         msg 'Setting up flathub...'
         setup_flathub
         msg 'Removing terminal ads (if they are enable)...'
@@ -822,6 +825,8 @@ EOF
     advanced_user() {
         msg 'Updating repositories...'
         repo_update
+        msg 'Installing tools to add repositories...'
+        install_repo_tools
         msg 'Setting up flathub...'
         setup_flathub
         msg 'Removing terminal ads (if they are enable)...'
@@ -855,6 +860,8 @@ EOF
     begginer_user() {
         msg 'Updating repositories...'
         repo_update
+        msg 'Installing tools to add repositories...'
+        install_repo_tools
         msg 'Setting up flathub...'
         setup_flathub
         msg 'Removing terminal ads (if they are enable)...'
