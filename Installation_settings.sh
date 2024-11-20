@@ -487,10 +487,12 @@ RESET='\033[0m'
         sudo -u "$user_common" bash <<EOF
         msg 'Configuring the dotfiles...'
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
+        git clone https://github.com/kevindexter22/.fonts.git /home/$user_common/.fonts
         cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
         source /home/$user_common/.bashrc
+        sudo fc-cache -fv
         msg 'creating folders to files organization...'
         msg  'Creating folders to Downloads...'
         mkdir /home/$user_common/Downloads/Torrent
@@ -537,6 +539,7 @@ EOF
         msg 'Configuring the dotfiles...'
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        git clone https://github.com/kevindexter22/.fonts.git /home/$user_common/.fonts
 	cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
@@ -545,6 +548,7 @@ EOF
         source /home/$user_common/.bashrc
         source /home/$user_common/.tmux.conf
         source /home/$user_common/.conf/alacritty/alacritty.toml
+        sudo fc-cache -fv
         msg 'creating folders to files organization...'
         msg  'Creating folders to Downloads...'
         mkdir /home/$user_common/Downloads/Torrent
