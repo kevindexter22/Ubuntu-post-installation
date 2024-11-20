@@ -503,8 +503,12 @@ RESET='\033[0m'
         mkdir /home/$user_common/Downloads/Work
         mkdir /home/$user_common/Downloads/Others
         mkdir /home/$user_common/Downloads/Music
-        msg  'Creating folders to shared with VM on Virtualbox...'
+        msg  'Creating folders to Documents...'
         mkdir /home/$user_common/Documents/VM\ Shared
+        mkdir /home/$user_common/Documents/Scripts
+        mkdir /home/$user_common/Documents/Scripts/PDF
+        mkdir /home/$user_common/Documents/Scripts/PDF/Optimized
+        mkdir /home/$user_common/Documents/Scripts/whois
         msg 'Creating folders to Pictures...'
         mkdir /home/$user_common/Pictures/Google\ Photos
         mkdir /home/$user_common/Pictures/Personal\ Pictures
@@ -561,8 +565,10 @@ EOF
         mkdir /home/$user_common/Downloads/Music
         msg  'Creating folders to Documents...'
         mkdir /home/$user_common/Documents/VM\ Shared
-        mkdir /home/$user_common/Documents/PDF
-        mkdir /home/$user_common/Documents/PDF/Optimized
+        mkdir /home/$user_common/Documents/Scripts
+        mkdir /home/$user_common/Documents/Scripts/PDF
+        mkdir /home/$user_common/Documents/Scripts/PDF/Optimized
+        mkdir /home/$user_common/Documents/Scripts/whois
         msg 'Creating folders to Pictures...'
         mkdir /home/$user_common/Pictures/Google\ Photos
         mkdir /home/$user_common/Pictures/Personal\ Pictures

@@ -503,8 +503,12 @@ RESET='\033[0m'
         mkdir /home/$user_common/Downloads/Trabalho
         mkdir /home/$user_common/Downloads/Outros
         mkdir /home/$user_common/Downloads/Música
-        msg  'Criando pastas para compartilhamento de arquivos com VM do Virtualbox...'
+         msg  'Criando pastas em Documentos...'
         mkdir /home/$user_common/Documentos/VM\ Shared
+        mkdir /home/$user_common/Documentos/Scripts
+        mkdir /home/$user_common/Documentos/Scripts/PDF
+        mkdir /home/$user_common/Documentos/Scripts/PDF/Otimizados
+        mkdir /home/$user_common/Documentos/Scripts/whois
         msg 'Criando pastas para Imagens...'
         mkdir /home/$user_common/Imagens/Google\ Photos
         mkdir /home/$user_common/Imagens/Fotos
@@ -562,8 +566,10 @@ EOF
         mkdir /home/$user_common/Downloads/Música
         msg  'Criando pastas em Documentos...'
         mkdir /home/$user_common/Documentos/VM\ Shared
-        mkdir /home/$user_common/Documentos/PDF
-        mkdir /home/$user_common/Documentos/PDF/Otimizados
+        mkdir /home/$user_common/Documentos/Scripts
+        mkdir /home/$user_common/Documentos/Scripts/PDF
+        mkdir /home/$user_common/Documentos/Scripts/PDF/Otimizados
+        mkdir /home/$user_common/Documentos/Scripts/whois
         msg 'Criando pastas para Imagens...'
         mkdir /home/$user_common/Imagens/Google\ Photos
         mkdir /home/$user_common/Imagens/Fotos
