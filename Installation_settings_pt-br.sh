@@ -141,6 +141,11 @@ RESET='\033[0m'
     repo_for_gamers() {
         # retroarch
         sudo add-apt-repository ppa:libretro/stable
+        }
+        
+    repo_for_steam() {
+        # Repo for steam (architecture i386)
+         sudo add-apt-repository universe multiverse 
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -150,7 +155,8 @@ RESET='\033[0m'
        apt install curl apt-transport-https software-properties-common -y
     }
     install_essentials_tools() {
-        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates tree -y
+        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates tree gnome-calendar -y
+        flatpak install https://dl.flathub.org/repo/appstream/org.gnome.Snapshot.flatpakref -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
         # Microsoft Fonts
@@ -165,7 +171,7 @@ RESET='\033[0m'
     }
     
     install_basic_applications() {
-        apt install libreoffice audacity youtubedl-gui qbittorrent vlc winff thunderbird gnome-shell-extensions arandr -y
+        apt install libreoffice audacity youtubedl-gui qbittorrent vlc winff handbrake thunderbird gnome-shell-extensions arandr -y
         sudo snap install foliate
     }
 
@@ -191,7 +197,7 @@ RESET='\033[0m'
     }
     
     install_it_tools() {
-        aptitude install dia rpi-imager anydesk virtualbox wireshark -y
+        aptitude install dia rpi-imager anydesk virtualbox wireshark remmina -y
         wget --max-redirect 100 https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
         sudo dpkg -i balena-etcher_*
         apt --fix-broken install
@@ -205,6 +211,9 @@ RESET='\033[0m'
     install_programming_applications() {
          apt install arduino arduino-* dbeaver-ce ca-certificates code android-tools-adb -y
          sudo snap install notepad-plus-plus
+     }
+     setup_architecture_i386() {
+          sudo dpkg  --add-architecture i386    
      }
      install_steam() {
           aptitude install steam-installer steam-devices -y
@@ -342,6 +351,9 @@ RESET='\033[0m'
                  case "$choice" in
                 1)
                     msg 'Instalando Steam...'
+                    repo_for_steam
+                    setup_architecture_i386
+                    repo_update
                     install_steam
                     msg 'Steam instalada com sucesso!'
                     ;;
@@ -365,6 +377,8 @@ RESET='\033[0m'
                 5)
                     msg 'Instalando todas as opções...'
                     repo_for_gamers
+                    repo_for_steam
+                    setup_architecture_i386
                     repo_update
                     install_steam
                     install_lutris
@@ -473,6 +487,26 @@ RESET='\033[0m'
              fi
          done
        }
+       
+       ubuntu_pro_activate() {
+               echo
+               echo -e "${YELLOW}Você quer ativar a versão Pro do Ubuntu? (s/n) ${RESET}"
+               echo
+               while true; do
+                  read choice
+                  if [[ "$choice" == 's' || "$choice" == 'S' ]]; then
+                       read -p 'Insira o token: ' ubuntu_pro_token
+                       sudo pro attach $ubuntu_pro_token
+                       dist_upgrade
+                       msg 'Ubuntu Pro ativado com sucesso!'
+                       ask_reboot
+                       break
+                  fi
+                  if [[ "$choice" == 'n' || "$choice" == 'N' ]]; then
+                       break
+                  fi
+             done
+     }
        
 # ─────────────────────────────────────────────────────────────────────────────
 # Download e configuração de pastas e repositórios
@@ -670,7 +704,7 @@ EOF
  ║                                                                        ║
  ║                                                                        ║
  ║ Feito por: Kevin Oliveira                                              ║
- ║ Versão do script: 1.0                                                  ║
+ ║ Versão do script: 2.0                                                  ║
  ╚════════════════════════════════════════════════════════════════════════╝
     
         ${RESET}"
@@ -680,7 +714,7 @@ EOF
         echo -e "${ORANGE}Selecione o que deseja fazer: ${RESET}"
         echo
         echo -e "${ORANGE}Perfis de Configuração: ${RESET}"
-        echo '1  - Aplicar todas as configurações' 
+        echo '1  - Aplicar todas as configurações (exceto as configurações opcionais)' 
         echo '2  - Configurar para um usuário comum'
         echo '3  - Configurar para um usuário avançado'
         echo '4  - Configurar para um usuário iniciante'
@@ -689,6 +723,8 @@ EOF
         echo '6  - Desbloquear mais opções no gerenciador de inicialização'
         echo -e "${ORANGE}Pacotes de Aplicativos: ${RESET}"
         echo '7  - Instalar pacotes de aplicativos adicionais'
+        echo -e "${ORANGE}Configurações Opcionais: ${RESET}"
+        echo '8  - Ativar a versão pro do ubuntu'
         echo 's  - Sair'
         echo
     }
@@ -737,6 +773,9 @@ EOF
          7)
              install_extra_packages_options
              ;;             
+         8)
+             ubuntu_pro_activate
+             ;;         
          s)
              msg 'Até mais!'
              exit 0
@@ -757,6 +796,8 @@ EOF
         repo_it_tools
         repo_programming_applications
 	repo_for_gamers
+	repo_for_steam
+        setup_architecture_i386
         msg 'Atualizando os repositórios...'
         repo_update
         msg 'Configurando flathub'
