@@ -673,6 +673,20 @@ EOF
         fi
    }
    
+   disable_suspend_configuration_systemd() {
+             msg 'Disabling suspend and hibernation via systemd'
+             sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+             
+             # Backup of configuration file
+             sudo cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+        
+             # Change the settings on file.conf
+	     sudo echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+             sudo echo HandleLidSwitchDocked=ignore >> /etc/systemd/logind.conf
+             
+             msg 'Settings applyed successfully!'
+   }
+   
 # ─────────────────────────────────────────────────────────────────────────────
 # Restart function
 # ─────────────────────────────────────────────────────────────────────────────
@@ -742,6 +756,7 @@ EOF
         echo '7  - Install extra application packages'
         echo -e "${ORANGE}Optional settings: ${RESET}"
         echo '8  - Activate ubuntu pro version'
+        echo '9  - Disable suspend and hibernation via systemd (for older computers)'
         echo 'q  - Exit'
         echo
     }
@@ -792,6 +807,10 @@ EOF
              ;;             
          8)
              ubuntu_pro_activate_opt
+             ;;
+         9)
+             disable_suspend_configuration_systemd
+             ask_reboot
              ;;
          q)
              msg 'See you soon!'
