@@ -499,6 +499,25 @@ RESET='\033[0m'
                        sudo pro attach $ubuntu_pro_token
                        dist_upgrade
                        msg 'Ubuntu Pro ativado com sucesso!'
+                       break
+                  fi
+                  if [[ "$choice" == 'n' || "$choice" == 'N' ]]; then
+                       break
+                  fi
+             done
+     }
+     ubuntu_pro_activate_opt() {
+               echo
+               echo -e "${YELLOW}Você quer ativar a versão Pro do Ubuntu? (s/n) ${RESET}"
+               echo
+               while true; do
+                  read choice
+                  if [[ "$choice" == 's' || "$choice" == 'S' ]]; then
+                       read -p 'Insira o token: ' ubuntu_pro_token
+                       sudo pro attach $ubuntu_pro_token
+                       dist_upgrade
+                       msg 'Ubuntu Pro ativado com sucesso!'
+                       msg 'Reinicie seu computador para concluir a ativação.'
                        ask_reboot
                        break
                   fi
@@ -714,7 +733,7 @@ EOF
         echo -e "${ORANGE}Selecione o que deseja fazer: ${RESET}"
         echo
         echo -e "${ORANGE}Perfis de Configuração: ${RESET}"
-        echo '1  - Aplicar todas as configurações (exceto as configurações opcionais)' 
+        echo '1  - Aplicar todas as configurações' 
         echo '2  - Configurar para um usuário comum'
         echo '3  - Configurar para um usuário avançado'
         echo '4  - Configurar para um usuário iniciante'
@@ -774,7 +793,7 @@ EOF
              install_extra_packages_options
              ;;             
          8)
-             ubuntu_pro_activate
+             ubuntu_pro_activate_opt
              ;;         
          s)
              msg 'Até mais!'
@@ -826,6 +845,8 @@ EOF
         install_video_editor_live
         msg 'Instalando lojas de jogos e emuladores...'
         install_for_gamers
+        msg 'Ativação da versão pro do ubuntu...'
+        ubuntu_pro_activate
         msg 'Atualizando os aplicativos...'
         system_update
         msg 'Atualizando os pacotes snap...'

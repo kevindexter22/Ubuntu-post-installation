@@ -498,6 +498,26 @@ RESET='\033[0m'
                        sudo pro attach $ubuntu_pro_token
                        dist_upgrade
                        msg 'Ubuntu Pro active successfully!'
+                       break
+                  fi
+                  if [[ "$choice" == 'n' || "$choice" == 'N' ]]; then
+                       break
+                  fi
+             done
+     }
+     
+     ubuntu_pro_activate_opt() {
+               echo
+               echo -e "${YELLOW}Do you wanna activate the Ubuntu Pro version? (y/n) ${RESET}"
+               echo
+               while true; do
+                  read choice
+                  if [[ "$choice" == 'y' || "$choice" == 'Y' ]]; then
+                       read -p 'Insert the token: ' ubuntu_pro_token
+                       sudo pro attach $ubuntu_pro_token
+                       dist_upgrade
+                       msg 'Ubuntu Pro active successfully!'
+                       msg 'Restart your computer to complete activation.'
                        ask_reboot
                        break
                   fi
@@ -711,7 +731,7 @@ EOF
         echo -e "${ORANGE}Choose what to do: ${RESET}"
         echo
         echo -e "${ORANGE}Configuration profiles: ${RESET}"
-        echo '1  - Apply all settings (except optional ones)' 
+        echo '1  - Apply all settings' 
         echo '2  - Setup for common users'
         echo '3  - Setup for advanced users'
         echo '4  - Setup for begginer users'
@@ -771,7 +791,7 @@ EOF
              install_extra_packages_options
              ;;             
          8)
-             ubuntu_pro_activate
+             ubuntu_pro_activate_opt
              ;;
          q)
              msg 'See you soon!'
@@ -823,6 +843,8 @@ EOF
         install_video_editor_live
         msg 'Installing games store and emulators...'
         install_for_gamers
+        msg 'Ubuntu pro activate...'
+        ubuntu_pro_activate
 	msg 'Updating applications...'
         system_update
         msg 'Updating snap packages...'
