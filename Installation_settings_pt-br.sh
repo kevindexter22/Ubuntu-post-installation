@@ -155,7 +155,7 @@ RESET='\033[0m'
        apt install curl apt-transport-https software-properties-common -y
     }
     install_essentials_tools() {
-        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates tree gnome-calendar -y
+        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 f3 nload gnupg2 ca-certificates tree gnome-calendar -y
         flatpak install https://dl.flathub.org/repo/appstream/org.gnome.Snapshot.flatpakref -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
@@ -758,7 +758,7 @@ EOF
         echo '7  - Instalar pacotes de aplicativos adicionais'
         echo -e "${ORANGE}Configurações Opcionais: ${RESET}"
         echo '8  - Ativar a versão pro do ubuntu'
-        echo '9  - Desabilitar hibernação e suspensão via systemd (para computadores antigos)
+        echo '9  - Desabilitar hibernação e suspensão via systemd (para computadores antigos)'
         echo 's  - Sair'
         echo
     }
