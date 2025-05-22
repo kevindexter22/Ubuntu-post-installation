@@ -154,7 +154,7 @@ RESET='\033[0m'
        apt install curl apt-transport-https software-properties-common -y
     }
     install_essentials_tools() {
-        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates f3 tree gnome-calendar -y
+        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates f3 tree gnome-calendar setserial cu -y
         sudo flatpak install https://dl.flathub.org/repo/appstream/org.gnome.Snapshot.flatpakref -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
@@ -196,7 +196,7 @@ RESET='\033[0m'
     }
     
     install_it_tools() {
-        aptitude install dia rpi-imager anydesk virtualbox wireshark remmina -y
+        aptitude install dia rpi-imager anydesk virtualbox wireshark remmina putty* -y
         wget --max-redirect 100 https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
         sudo dpkg -i balena-etcher_*
         apt --fix-broken install
@@ -221,7 +221,7 @@ RESET='\033[0m'
           aptitude install lutris -y
      }
      install_retroarch() {
-          aptitude install retroarch -y
+          sudo snap install retroarch
      }
      install_moonlight() {
           sudo snap install moonlight
