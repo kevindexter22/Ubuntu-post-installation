@@ -155,7 +155,7 @@ RESET='\033[0m'
        apt install curl apt-transport-https software-properties-common -y
     }
     install_essentials_tools() {
-        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 f3 nload gnupg2 ca-certificates tree gnome-calendar setserial cu -y
+        apt install aptitude htop net-tools snapd gparted cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 f3 nload gnupg2 ca-certificates tree gnome-calendar setserial cu -y
         flatpak install https://dl.flathub.org/repo/appstream/org.gnome.Snapshot.flatpakref -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
@@ -173,6 +173,10 @@ RESET='\033[0m'
     install_basic_applications() {
         apt install libreoffice audacity youtubedl-gui qbittorrent vlc winff handbrake thunderbird gnome-shell-extensions arandr -y
         sudo snap install foliate
+        sudo snap install spider-solitaire
+        sudo snap install kmahjongg
+        sudo snap install space-cadet-pinball
+        sudo snap install gnome-mines
     }
 
     install_google_chrome_browser() {
@@ -197,7 +201,8 @@ RESET='\033[0m'
     }
     
     install_it_tools() {
-        aptitude install dia rpi-imager anydesk virtualbox wireshark remmina putty* -y
+        sudo apt install dia rpi-imager anydesk wireshark remmina putty* -y
+        sudo aptitude install virtualbox -y
         wget --max-redirect 100 https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
         sudo dpkg -i balena-etcher_*
         apt --fix-broken install
@@ -332,6 +337,59 @@ RESET='\033[0m'
                        break
                   fi
              done
+     }
+     gpu_install_ask() {
+        echo
+          echo -e "${YELLOW}Você possui Placa Gráfica ou GPU (s/n)? ${RESET}"
+          echo
+          while true; do
+             read gpu_choice
+             if [[ "$gpu_choice" == 'y' || "$gpu_choice" == 'Y' ]]; then
+                   gpu_install_opt
+                   break
+             fi
+             if [[ "$gpu_choice" == 'n' || "$gpu_choice" == 'N' ]]; then
+                   break
+             fi
+         done   
+     }
+     gpu_install_opt() {
+        echo
+         echo -e "${YELLOW}Escolha o fabricante do GPU: ${RESET}"
+         echo
+         echo '1 - AMD'
+         echo '2 - NVIDIA/Geforce'
+         echo 's - Pular ou sair'
+         echo
+         while true; do
+            read -p "Digite sua opção: " gpu_vendor
+
+             for choice in $gpu_vendor; do
+                 case "$choice" in
+                1)
+                    msg 'Instalando drivers da AMD...'
+                    wget https://github.com/kevindexter22/GPU_Driver_Ubuntu/blob/main/amdgpu-install.deb
+                    sudo dpkg -i amdgpu-install.deb
+                    sudo rm -fr amdgpu-install.deb 
+                    msg 'Drivers instalados com sucesso!'
+                    ;;
+                2)
+                    msg 'Instalando drivers da NVIDIA/Geforce...'
+                    sudo ubuntu-drivers autoinstal
+                    msg 'Drivers instalados com sucesso!'
+                    ;;
+                s)
+                   msg 'Pulando a instalação.'
+                   break
+                   ;;
+                *)
+                   error_msg 'Opção inválida. Por favor, digite um número válido ou "s" para sair.'
+                   ;;
+             esac
+          done
+             msg 'Processo de instalação finalizado. Saindo...'
+             break 
+         done    
      }
      install_for_gamers() {
          echo
@@ -759,6 +817,7 @@ EOF
         echo -e "${ORANGE}Configurações Opcionais: ${RESET}"
         echo '8  - Ativar a versão pro do ubuntu'
         echo '9  - Desabilitar hibernação e suspensão via systemd (para computadores antigos)'
+        echo '10 - Instalar drivers da Placa Gráfica (GPU)'
         echo 's  - Sair'
         echo
     }
@@ -814,6 +873,10 @@ EOF
              disable_suspend_configuration_systemd
              ask_reboot
              ;;
+         10)
+             gpu_install_opt
+             ask_reboot
+             ;;
          s)
              msg 'Até mais!'
              exit 0
@@ -846,6 +909,8 @@ EOF
         dist_upgrade
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
+        msg 'Instalando drivers adicionais...'
+        gpu_install_ask
 	msg 'Instalando ferramentas essenciais...'
         install_essentials_tools
 	msg 'Instalando ferramentas avançadas...'
@@ -893,6 +958,8 @@ EOF
         setup_flathub
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
+        msg 'Instalando drivers adicionais...'
+        gpu_install_ask
         msg 'Instalando ferramentas essenciais...'
         install_essentials_tools
         msg 'Instalando aplicativos básicos...'
@@ -926,6 +993,8 @@ EOF
         setup_flathub
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
+        msg 'Instalando drivers adicionais...'
+        gpu_install_ask
         msg 'Instalando as ferramentas essenciais...'
         install_essentials_tools
 	msg 'Instalando as ferramentas avançadas...'
@@ -961,6 +1030,8 @@ EOF
         setup_flathub
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
+        msg 'Instalando drivers adicionais...'
+        gpu_install_ask
         msg 'Instalando as ferramentas essenciais...'
         install_essentials_tools
 	msg 'Instalando as ferramentas avançadas...'

@@ -154,7 +154,7 @@ RESET='\033[0m'
        apt install curl apt-transport-https software-properties-common -y
     }
     install_essentials_tools() {
-        apt install aptitude htop net-tools snapd gparted timeshift cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates f3 tree gnome-calendar setserial cu -y
+        apt install aptitude htop net-tools snapd gparted cpu-x gdebi git tesseract-ocr poppler-utils whois vim binutils preload default-jdk ubuntu-restricted-extras stow traceroute ssh dnsutils mtr iperf3 nload gnupg2 ca-certificates f3 tree gnome-calendar setserial cu -y
         sudo flatpak install https://dl.flathub.org/repo/appstream/org.gnome.Snapshot.flatpakref -y
         sudo systemctl start ssh && sudo systemctl enable ssh
         
@@ -172,6 +172,10 @@ RESET='\033[0m'
     install_basic_applications() {
         apt install libreoffice audacity youtubedl-gui qbittorrent vlc winff handbrake thunderbird gnome-shell-extensions arandr -y
         sudo snap install foliate
+        sudo snap install spider-solitaire
+        sudo snap install kmahjongg
+        sudo snap install space-cadet-pinball
+        sudo snap install gnome-mines
     }
 
     install_google_chrome_browser() {
@@ -196,7 +200,8 @@ RESET='\033[0m'
     }
     
     install_it_tools() {
-        aptitude install dia rpi-imager anydesk virtualbox wireshark remmina putty* -y
+        sudo apt install dia rpi-imager anydesk wireshark remmina putty* -y
+        sudo aptitude install virtualbox -y
         wget --max-redirect 100 https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
         sudo dpkg -i balena-etcher_*
         apt --fix-broken install
@@ -207,6 +212,7 @@ RESET='\033[0m'
     install_cd_dvd_burn() {
         aptitude install brasero k3b -y
     }
+       
     install_programming_applications() {
          apt install arduino arduino-* dbeaver-ce ca-certificates code android-tools-adb -y
          sudo snap install notepad-plus-plus
@@ -331,6 +337,59 @@ RESET='\033[0m'
                        break
                   fi
              done
+     }
+     gpu_install_ask() {
+        echo
+          echo -e "${YELLOW}Do you have a GPU Card? ${RESET}"
+          echo
+          while true; do
+             read -p 'Enter your option (y/n): ' gpu_choice
+             if [[ "$gpu_choice" == 'y' || "$gpu_choice" == 'Y' ]]; then
+                   gpu_install_opt
+                   break
+             fi
+             if [[ "$gpu_choice" == 'n' || "$gpu_choice" == 'N' ]]; then
+                   break
+             fi
+         done   
+     }
+     gpu_install_opt() {
+        echo
+         echo -e "${YELLOW}Choose the vendor of your GPU Card: ${RESET}"
+         echo
+         echo '1 - AMD'
+         echo '2 - NVIDIA/Geforce'
+         echo 'q - Skip or quit'
+         echo
+         while true; do
+            read -p "Enter your choice: " gpu_vendor
+
+             for choice in $gpu_vendor; do
+                 case "$choice" in
+                1)
+                    msg 'Installing AMD GPU Drivers...'
+                    wget https://github.com/kevindexter22/GPU_Driver_Ubuntu/blob/main/amdgpu-install.deb
+                    sudo dpkg -i amdgpu-install.deb
+                    sudo rm -fr amdgpu-install.deb 
+                    msg 'GPU Drivers installed successfully!'
+                    ;;
+                2)
+                    msg 'Installing NVIDIA GPU Drivers...'
+                    sudo ubuntu-drivers autoinstal
+                    msg 'GPU Drivers installed successfully!'
+                    ;;
+                q)
+                   msg 'Skipping games installation.'
+                   break
+                   ;;
+                *)
+                   error_msg 'Invalid option. Please choose a valid number or "q" to quit.'
+                   ;;
+             esac
+          done
+             msg 'Installation process finished. Exiting...'
+             break 
+         done    
      }
      install_for_gamers() {
          echo
@@ -757,6 +816,7 @@ EOF
         echo -e "${ORANGE}Optional settings: ${RESET}"
         echo '8  - Activate ubuntu pro version'
         echo '9  - Disable suspend and hibernation via systemd (for older computers)'
+        echo '10 - Install GPU Drivers'
         echo 'q  - Exit'
         echo
     }
@@ -812,6 +872,10 @@ EOF
              disable_suspend_configuration_systemd
              ask_reboot
              ;;
+         10)
+             gpu_install_opt
+             ask_reboot
+             ;;
          q)
              msg 'See you soon!'
              exit 0
@@ -844,6 +908,8 @@ EOF
         dist_upgrade
         msg 'Removing terminal ads (if they are enable)...'
         disable_terminal_ads
+        msg 'Installing additional drivers...'
+        gpu_install_ask
 	msg 'Installing essentials tools...'
         install_essentials_tools
 	msg 'Installing advanced tools...'
@@ -891,6 +957,8 @@ EOF
         setup_flathub
         msg 'Removing terminal ads (if they are enable)...'
         disable_terminal_ads
+        msg 'Installing additional drivers...'
+        gpu_install_ask
         msg 'Installing essentials tools...'
         install_essentials_tools
         msg 'Installing basic applications...'
@@ -924,6 +992,8 @@ EOF
         setup_flathub
         msg 'Removing terminal ads (if they are enable)...'
         disable_terminal_ads
+        msg 'Installing additional drivers...'
+        gpu_install_ask
         msg 'Installing essentials tools...'
         install_essentials_tools
 	msg 'Installing advanced tools...'
@@ -959,6 +1029,8 @@ EOF
         setup_flathub
         msg 'Removing terminal ads (if they are enable)...'
         disable_terminal_ads
+        msg 'Installing additional drivers...'
+        gpu_install_ask
         msg 'Installing essentials tools...'
         install_essentials_tools
         msg 'Installing basic applications...'
