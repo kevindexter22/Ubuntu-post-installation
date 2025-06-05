@@ -391,6 +391,46 @@ RESET='\033[0m'
              break 
          done    
      }
+     gpu_install_opt2() {
+        echo
+         echo -e "${YELLOW}Escolha o fabricante do GPU: ${RESET}"
+         echo
+         echo '1 - AMD'
+         echo '2 - NVIDIA/Geforce'
+         echo 's - Pular ou sair'
+         echo
+         while true; do
+            read -p "Digite sua opção: " gpu_vendor
+
+             for choice in $gpu_vendor; do
+                 case "$choice" in
+                1)
+                    msg 'Instalando drivers da AMD...'
+                    wget https://github.com/kevindexter22/GPU_Driver_Ubuntu/blob/main/amdgpu-install.deb
+                    sudo dpkg -i amdgpu-install.deb
+                    sudo rm -fr amdgpu-install.deb 
+                    msg 'Drivers instalados com sucesso!'
+                    ask_reboot
+                    ;;
+                2)
+                    msg 'Instalando drivers da NVIDIA/Geforce...'
+                    sudo ubuntu-drivers autoinstal
+                    msg 'Drivers instalados com sucesso!'
+                    ask_reboot
+                    ;;
+                s)
+                   msg 'Pulando a instalação.'
+                   break
+                   ;;
+                *)
+                   error_msg 'Opção inválida. Por favor, digite um número válido ou "s" para sair.'
+                   ;;
+             esac
+          done
+             msg 'Processo de instalação finalizado. Saindo...'
+             break 
+         done    
+     }
      install_for_gamers() {
          echo
          echo -e "${YELLOW}Escolha o que gostaria de instalar: ${RESET}"
@@ -874,8 +914,7 @@ EOF
              ask_reboot
              ;;
          10)
-             gpu_install_opt
-             ask_reboot
+             gpu_install_opt2
              ;;
          s)
              msg 'Até mais!'
