@@ -203,6 +203,7 @@ RESET='\033[0m'
     install_it_tools() {
         sudo apt install dia rpi-imager anydesk wireshark remmina putty* -y
         sudo aptitude install virtualbox -y
+        sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager -y
         wget --max-redirect 100 https://github.com/balena-io/etcher/releases/download/v1.19.25/balena-etcher_1.19.25_amd64.deb
         sudo dpkg -i balena-etcher_*
         apt --fix-broken install
@@ -338,27 +339,13 @@ RESET='\033[0m'
                   fi
              done
      }
-     gpu_install_ask() {
-        echo
-          echo -e "${YELLOW}Você possui Placa Gráfica ou GPU (s/n)? ${RESET}"
-          echo
-          while true; do
-             read gpu_choice
-             if [[ "$gpu_choice" == 'y' || "$gpu_choice" == 'Y' ]]; then
-                   gpu_install_opt
-                   break
-             fi
-             if [[ "$gpu_choice" == 'n' || "$gpu_choice" == 'N' ]]; then
-                   break
-             fi
-         done   
-     }
      gpu_install_opt() {
         echo
-         echo -e "${YELLOW}Escolha o fabricante do GPU: ${RESET}"
+         echo -e "${YELLOW}Escolha o fabricante da sua Placa Grágica (GPU): ${RESET}"
          echo
          echo '1 - AMD'
          echo '2 - NVIDIA/Geforce'
+         echo '3 - Intel'
          echo 's - Pular ou sair'
          echo
          while true; do
@@ -378,6 +365,12 @@ RESET='\033[0m'
                     sudo ubuntu-drivers autoinstal
                     msg 'Drivers instalados com sucesso!'
                     ;;
+                3)
+                   msg 'Installing Intel HD Grapics Drivers...'
+                   sudo mkdir /etc/X11/xorg.conf.d/
+                   sudo echo -e 'Section "Device"\n Identifier "Intel Graphics"\n Driver "Intel"\n Option "AccelMethod" "sna"\n Option "TearFree" "true"\nEndSection' | sudo tee /etc/X11/xorg.conf.d/20-intel.conf
+                   msg 'GPU Drivers installed successfully!'
+                   ;;
                 s)
                    msg 'Pulando a instalação.'
                    break
@@ -397,6 +390,7 @@ RESET='\033[0m'
          echo
          echo '1 - AMD'
          echo '2 - NVIDIA/Geforce'
+         echo '3 - Intel'
          echo 's - Pular ou sair'
          echo
          while true; do
@@ -418,6 +412,13 @@ RESET='\033[0m'
                     msg 'Drivers instalados com sucesso!'
                     ask_reboot
                     ;;
+                3)
+                   msg 'Installing Intel HD Grapics Drivers...'
+                   sudo mkdir /etc/X11/xorg.conf.d/
+                   sudo echo -e 'Section "Device"\n Identifier "Intel Graphics"\n Driver "Intel"\n Option "AccelMethod" "sna"\n Option "TearFree" "true"\nEndSection' | sudo tee /etc/X11/xorg.conf.d/20-intel.conf
+                   msg 'GPU Drivers installed successfully!'
+                   ask_reboot
+                   ;;
                 s)
                    msg 'Pulando a instalação.'
                    break
@@ -949,7 +950,7 @@ EOF
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
         msg 'Instalando drivers adicionais...'
-        gpu_install_ask
+        gpu_install_opt
 	msg 'Instalando ferramentas essenciais...'
         install_essentials_tools
 	msg 'Instalando ferramentas avançadas...'
@@ -998,7 +999,7 @@ EOF
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
         msg 'Instalando drivers adicionais...'
-        gpu_install_ask
+        gpu_install_opt
         msg 'Instalando ferramentas essenciais...'
         install_essentials_tools
         msg 'Instalando aplicativos básicos...'
@@ -1033,7 +1034,7 @@ EOF
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
         msg 'Instalando drivers adicionais...'
-        gpu_install_ask
+        gpu_install_opt
         msg 'Instalando as ferramentas essenciais...'
         install_essentials_tools
 	msg 'Instalando as ferramentas avançadas...'
@@ -1070,7 +1071,7 @@ EOF
         msg 'Removendo ADS do terminal (se estiver habilitado)...'
         disable_terminal_ads
         msg 'Instalando drivers adicionais...'
-        gpu_install_ask
+        gpu_install_opt
         msg 'Instalando as ferramentas essenciais...'
         install_essentials_tools
 	msg 'Instalando as ferramentas avançadas...'
