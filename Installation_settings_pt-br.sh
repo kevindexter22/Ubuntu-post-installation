@@ -172,6 +172,10 @@ RESET='\033[0m'
     
     install_basic_applications() {
         apt install libreoffice audacity youtubedl-gui qbittorrent vlc winff handbrake thunderbird gnome-shell-extensions arandr -y
+        wget --max-redirect 100 https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb
+        sudo dpkg -i freedownloadmanager.deb
+        apt --fix-broken install
+        rm -fr freedownloadmanager.deb
         sudo snap install foliate
         sudo snap install spider-solitaire
         sudo snap install kmahjongg
