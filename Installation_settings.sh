@@ -645,6 +645,7 @@ RESET='\033[0m'
         msg 'Configuring the dotfiles...'
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
         git clone https://github.com/kevindexter22/.fonts.git /home/$user_common/.fonts
+        git clone https://github.com/kevindexter22/.icon.git /home/$user_common/.icon
         cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
@@ -687,7 +688,16 @@ EOF
         stow scripts
         sudo chmod +x /opt/scripts/*.sh
         msg 'You can found scripts in /opt/scripts.'
-        msg 'Configuration applied successfully!'    
+        msg 'Configuration applied successfully!'
+    }
+    desktop_repository_common_begginer() {
+        cd /
+        cd /usr/share
+        git clone https://github.com/kevindexter22/script_desktop.git
+        cp -R /usr/share/scripts_desktop/* /usr/share/applications/
+        cd /
+        msg 'You can found scripts.desktop in applications menu.'
+        msg 'Configuration applied successfully!'
     }
     dotfiles_repository_advanced_all() {
         echo
@@ -701,6 +711,7 @@ EOF
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         git clone https://github.com/kevindexter22/.fonts.git /home/$user_common/.fonts
+        git clone https://github.com/kevindexter22/.icon.git /home/$user_common/.icon
 	cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
@@ -749,6 +760,27 @@ EOF
         msg 'You can found scripts in /opt/scripts.'
         msg 'Configuration applied successfully!'    
     }
+    desktop_repository_advanced_all() {
+        echo
+        echo -e "${YELLOW}Do you wanna create script.desktop on applications menu? (y/n) ${RESET}"
+        echo
+          while true; do
+          read desktop_choice
+            if [[ "$desktop_choice" == 'y' || "$desktop_choice" == 'Y' ]]; then
+                cd /
+                cd /usr/share
+                git clone https://github.com/kevindexter22/script_desktop.git
+                cp -R /usr/share/scripts_desktop/* /usr/share/applications/
+                cd /
+                msg 'You can found scripts.desktop in applications menu.'
+                msg 'Configuration applied successfully!'
+                break
+             fi
+             if [[ "$choice" == 'n' || "$choice" == 'N' ]]; then
+                break
+            fi
+          done
+    }
  
 # ─────────────────────────────────────────────────────────────────────────────
 # Customized Configuration
@@ -776,7 +808,11 @@ EOF
              msg "The ssh access will use port 22."
         fi
    }
-   
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Disable suspend
+# ─────────────────────────────────────────────────────────────────────────────
+
    disable_suspend_configuration_systemd() {
              msg 'Disabling suspend and hibernation via systemd'
              sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
@@ -988,6 +1024,8 @@ EOF
         dotfiles_repository_advanced_all
         msg 'Downloading automation scripts...'
         scripts_repository_advanced_all
+        msg 'Downloading scripts.desktop...'
+        desktop_repository_advanced_all
         msg 'Cleaning up...'
         cleanup
     }
@@ -1024,6 +1062,8 @@ EOF
         dotfiles_repository_begginer_common
         msg 'Downloading automation scripts...'
         scripts_repository_common_begginer
+        msg 'Downloading scripts.desktop...'
+        desktop_repository_common_begginer
         msg 'Cleaning up...'
         cleanup
     }
@@ -1061,6 +1101,8 @@ EOF
         dotfiles_repository_advanced_all
         msg 'Downloading automation scripts...'
         scripts_repository_advanced_all
+        msg 'Downloading scripts.desktop...'
+        desktop_repository_advanced_all
         msg 'Cleaning up...'
         cleanup
     }
@@ -1096,6 +1138,8 @@ EOF
         dotfiles_repository_begginer_common
         msg 'Downloading automation scripts...'
         scripts_repository_common_begginer
+        msg 'Downloading scripts.desktop...'
+        desktop_repository_common_begginer
         msg 'Cleaning up...'
         cleanup
     }
