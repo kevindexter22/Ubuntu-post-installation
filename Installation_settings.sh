@@ -694,7 +694,7 @@ EOF
         cd /
         cd /usr/share
         git clone https://github.com/kevindexter22/script_desktop.git
-        cp -R /usr/share/scripts_desktop/* /usr/share/applications/
+        cp -R /usr/share/script_desktop/* /usr/share/applications/
         cd /
         msg 'You can found scripts.desktop in applications menu.'
         msg 'Configuration applied successfully!'
@@ -770,7 +770,7 @@ EOF
                 cd /
                 cd /usr/share
                 git clone https://github.com/kevindexter22/script_desktop.git
-                cp -R /usr/share/scripts_desktop/* /usr/share/applications/
+                cp -R /usr/share/script_desktop/* /usr/share/applications/
                 cd /
                 msg 'You can found scripts.desktop in applications menu.'
                 msg 'Configuration applied successfully!'
