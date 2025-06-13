@@ -359,9 +359,9 @@ RESET='\033[0m'
                  case "$choice" in
                 1)
                     msg 'Instalando drivers da AMD...'
-                    wget https://github.com/kevindexter22/GPU_Driver_Ubuntu/blob/main/amdgpu-install.deb
-                    sudo dpkg -i amdgpu-install.deb
-                    sudo rm -fr amdgpu-install.deb 
+                    wget https://repo.radeon.com/amdgpu-install/6.4.1/ubuntu/noble/amdgpu-install_6.4.60401-1_all.deb
+                    sudo dpkg -i amdgpu-install_6.4.60401-1_all.deb
+                    sudo rm -fr amdgpu-install* 
                     msg 'Drivers instalados com sucesso!'
                     ;;
                 2)
