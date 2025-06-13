@@ -667,6 +667,7 @@ RESET='\033[0m'
         mkdir /home/$user_common/Documents/Scripts/PDF
         mkdir /home/$user_common/Documents/Scripts/PDF/Optimized
         mkdir /home/$user_common/Documents/Scripts/whois
+	touch /home/$user_common/Documents/Scripts/whois/search_whois.txt
         msg 'Creating folders to Pictures...'
         mkdir /home/$user_common/Pictures/Google\ Photos
         mkdir /home/$user_common/Pictures/Personal\ Pictures
@@ -737,6 +738,7 @@ EOF
         mkdir /home/$user_common/Documents/Scripts/PDF
         mkdir /home/$user_common/Documents/Scripts/PDF/Optimized
         mkdir /home/$user_common/Documents/Scripts/whois
+	touch /home/$user_common/Documents/Scripts/whois/search_whois.txt
         msg 'Creating folders to Pictures...'
         mkdir /home/$user_common/Pictures/Google\ Photos
         mkdir /home/$user_common/Pictures/Personal\ Pictures
@@ -875,7 +877,7 @@ EOF
  ║                                                                        ║
  ║                                                                        ║
  ║ By: Kevin Oliveira                                                     ║
- ║ Script version: 2.0                                                    ║
+ ║ Script version: 3.0                                                    ║
  ╚════════════════════════════════════════════════════════════════════════╝
     
         ${RESET}"
