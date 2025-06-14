@@ -644,7 +644,6 @@ RESET='\033[0m'
         msg 'Configurando os dotfiles...'
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
         git clone https://github.com/kevindexter22/.fonts.git /home/$user_common/.fonts
-        git clone https://github.com/kevindexter22/.icon.git /home/$user_common/.icon
         cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
@@ -697,6 +696,9 @@ EOF
         git clone https://github.com/kevindexter22/script_desktop.git
         cp -R /usr/share/script_desktop/* /usr/share/applications/
         cd /
+	cd /opt
+        git clone https://github.com/kevindexter22/.icon.git
+	cd /
         msg 'Você irá encontrar o atalho dos scripts no menu de aplicativos.'
         msg 'Configuração aplicada com sucesso!'
     }
@@ -712,7 +714,6 @@ EOF
 	git clone https://github.com/kevindexter22/dotfiles.git /home/$user_common/dotfiles
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         git clone https://github.com/kevindexter22/.fonts.git /home/$user_common/.fonts
-        git clone https://github.com/kevindexter22/.icon.git /home/$user_common/.icon
 	cd /home/$user_common/dotfiles/
         mv /home/$user_common/.bashrc /home/$user_common/.ori.bashrc
         stow bash
@@ -775,6 +776,9 @@ EOF
                 git clone https://github.com/kevindexter22/script_desktop.git
                 cp -R /usr/share/script_desktop/* /usr/share/applications/
                 cd /
+		cd /opt
+                git clone https://github.com/kevindexter22/.icon.git
+	        cd /
                 msg 'Você irá encontrar o atalho dos scripts no menu de aplicativos.'
                 msg 'Configuração aplicada com sucesso!'
                 break
