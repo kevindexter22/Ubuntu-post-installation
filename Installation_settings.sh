@@ -778,7 +778,7 @@ EOF
                 msg 'Configuration applied successfully!'
                 break
              fi
-             if [[ "$choice" == 'n' || "$choice" == 'N' ]]; then
+             if [[ "$desktop_choice" == 'n' || "$desktop_choice" == 'N' ]]; then
                 break
             fi
           done
